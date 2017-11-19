@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Your Travels</title>
+</head>
+
+<body>
+    <h2>Hi {{ request.session.username }}! Here are your Trips</h2>
+
+    {% if messages %} {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} {% endif %}
+
+
+    <!-- This table shows the current user's trips -->
+    <table>
+        <h3>Your Trip Schedules</h3>
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+        </tr>
+        {% for record in travels_key %}
+        <tr>
+            <td>
+                <a href="/destination/{{record.id}}">{{ record.destination }} </a>
+            </td>
+            <td>{{ record.start_date }}</td>
+            <td>{{ record.end_date }}</td>
+            <td>{{ record.desc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <!-- This table shows the trips of the user's friends -->
+    <table>
+        <h3>Friend's Schedules</h3>
+        <tr>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            <th>Do You Want To Join?</th>
+        </tr>
+        {% for record in travels_key2 %}
+        <tr>
+            <td>{{ record.username }}</td>
+            <td>
+                <a href="/destination/{{record.id}}">{{ record.destination }} </a>
+            </td>
+            <td>{{ record.start_date }}</td>
+            <td>{{ record.end_date }}</td>
+            <td>{{ record.desc }}</td>
+            <td>
+                <a href="/join/{{record.id}}">Join</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/new_trip">Add A Trip</a>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Destination</title>
+</head>
+<body>
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+
+    <h3>Your Trip</h3>
+    <div>
+        <!-- username is not showing since i am passing to many variables through -->
+        <p>Planned By: {{ trip_planner.username }}</p> 
+        <p><h3>Destination: {{ travels_key.destination }}</h3></p>
+        <p>Description: {{ travels_key.desc }}</p>
+        <p>Start Date: {{ travels_key.start_date }}</p>
+        <p>End Date: {{ travels_key.end_date }}</p>
+    </div>
+
+    <div>
+        <h3>Others Joining This Trip</h3>
+        <p></p>
+    </div>
+    <a href="/travels">Travels</a>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
