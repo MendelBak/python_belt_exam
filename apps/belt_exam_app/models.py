@@ -46,7 +46,6 @@ class UserManager(models.Manager):
 
     def create_trip_validator(self, postData):
         errors = {}
-        #Converting start_date post data into datetime format since can't compare unicode object to datetime object.
         today = datetime.now()
     
         if len(postData["destination"]) < 2:
@@ -57,7 +56,7 @@ class UserManager(models.Manager):
 
         try:
             start_date_var = postData["start_date"]
-            start_date_var2 = datetime.strptime(start_date_var, "%Y-%m-%d")
+            start_date_var2 = datetime.strptime(start_date_var, "%Y-%m-%d") #converting date string to a datetime instance for validation below.
 
             if today > start_date_var2:
                 errors["date"] = "Start date must be a date in the future, not the past, Dr Brown."
